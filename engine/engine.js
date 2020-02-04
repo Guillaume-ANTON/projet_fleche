@@ -36,7 +36,6 @@ inquirer.prompt(questionJoueurs).then(answers => {
   inquirer.prompt(questionNomJoeurs).then(answers => {
     console.log(answers)
     for (var namePlayers in answers) {
-      answers = new Players();
     }
   })
 });
