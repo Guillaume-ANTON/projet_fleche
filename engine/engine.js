@@ -1,13 +1,13 @@
 var inquirer = require('inquirer');
 var Players = require ('../models/Players');
+var Game = require('../models/Game');
 
 
 console.log('Engine lancé !!');
 
 var nbPlayers = null;
 var Mode = null;
-var Players = null;
-// var test = ['guigui', 'toto', 'ouioui']
+var TabPlayers = [];
 
 function checkPlayersInStart (nombre) {
   if(nombre > 1 && nombre < 5) {
@@ -17,9 +17,19 @@ function checkPlayersInStart (nombre) {
   }
 }
 
-function randPlayers (Players){
-  const randomElement = Players[Math.floor(Math.random() * Players.length)];
-  console.log(randomElement)
+function isFinished(status){
+  if(status === 'draft') {
+    return true;
+  } else if (status === 'started') {
+    return true;
+  } else {
+    console.log("La partie est finit merci d'avoir joué")
+  }
+}
+
+function randPlayers (TabPlayers){
+  const randomName = TabPlayers[Math.floor(Math.random() * TabPlayers.length)];
+  console.log(`C'est à ${randomName} de commencer`)
 }
 
 var questionJoueurs = [
@@ -55,15 +65,12 @@ inquirer.prompt(questionJoueurs).then(answers => {
   }
   inquirer.prompt(questionNomJoueurs).then(answers => {
     for (var namePlayers in answers) {
-      let Players = answers.namePlayers
       let players = new Players(answers[namePlayers]);
       console.log(players)
-      console.log(Players)
+      TabPlayers.push(answers[namePlayers]);
   }
     inquirer.prompt(choiceMode).then(answers => {
       Mode = answers.modeGame
-      console.log(Mode)
-      randPlayers();
       if(Mode === 'Tour du monde'){
         console.log(`Vous avez choisi le ${Mode}`)
       } else if(Mode === "301"){
@@ -71,11 +78,10 @@ inquirer.prompt(questionJoueurs).then(answers => {
       } else {
         console.log(`Vous avez choisi le ${Mode}`)
       }
+      randPlayers(TabPlayers);
     })
   })
 });
 
 
-
-// Sélection du joueur qui commence en random 
 // Function shoot
