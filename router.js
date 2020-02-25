@@ -183,7 +183,7 @@ router.delete('/players/:id', (req, res, next) => {
 
 // Show Games
 router.get('/games', (req, res, next) => {
-    Players.getGame()
+    Games.getGame()
     .then((Games) => { 
         res.format({
             html: () => {
@@ -217,7 +217,7 @@ router.get('/games', (req, res, next) => {
 
 // Show form creat new party
 router.get('/games/new', (req, res, next) => {
-    Players.newGame()
+    Games.newGame()
     .then((Games) => { 
         res.format({
             html: () => {
@@ -248,7 +248,7 @@ router.get('/games/new', (req, res, next) => {
 
 // Create new game
 router.post('/games', (req, res, next) => {
-    Players.newGame(req.body)
+    Games.newGame(req.body)
     res.format({
         html : () => {
             res.redirect(301, '/games/:id')
@@ -266,7 +266,7 @@ router.get('/games/:id' , (req, res, next) => {
 
 // Edit game with Id
 router.get('/games/:id/edit', (req, res, next) => {
-    Players.newGame()
+    Games.newGame()
     .then((Games) => { 
         res.format({
             html: () => {
@@ -297,7 +297,7 @@ router.get('/games/:id/edit', (req, res, next) => {
 
 // Edit name and gamemode 
 router.patch('/games/:id', (req, res, next) => {
-    Players.newGame(req.body)
+    Games.newGame(req.body)
     res.format({
         html : () => {
             res.redirect(200, '/games/:id')
@@ -310,7 +310,7 @@ router.patch('/games/:id', (req, res, next) => {
 
 // Delete game with Id
 router.delete('/games/:id', (req, res, next) => {
-    Players.deleteGame(req.body)
+    Games.deleteGame(req.body)
     res.format({
         html : () => {
             res.redirect(301, '/games/')
@@ -323,7 +323,7 @@ router.delete('/games/:id', (req, res, next) => {
 
 // Show list Players
 router.get('/games/:id/players', (req, res, next) => {
-    Players.getGame()
+    Games.getGame()
     .then((Games) => { 
         res.format({
             html: () => {
