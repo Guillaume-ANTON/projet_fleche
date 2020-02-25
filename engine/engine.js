@@ -25,7 +25,7 @@ function checkPlayersInStart(nombre) {
 function newGame(){
   statusGame = 'started';
   let game = new Game(Mode, statusGame, now);
-  console.log(game)
+  console.log(game) 
 }
 
 // Function for say when party is finish
