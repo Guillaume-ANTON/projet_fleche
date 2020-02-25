@@ -21,6 +21,7 @@ router.all('/', (req, res, next) => {
 
 // Players
 
+// Get All players
 router.get('/players', (req, res, next) => {
     Players.getPlayers()
     .then((Players) => { 
@@ -51,6 +52,7 @@ router.get('/players', (req, res, next) => {
     })
 })
 
+// Insert Players
 router.post('/players', (req, res, next) => {
     Players.insertPlayers(req.body)
     res.format({
@@ -63,6 +65,7 @@ router.post('/players', (req, res, next) => {
     })
 })
 
+// Delete Players with Id
 router.delete('/players/:id', (req, res, next) => {
     Players.deletePlayers(req.body)
     res.format({
@@ -75,6 +78,7 @@ router.delete('/players/:id', (req, res, next) => {
     })
 })
 
+// Form creat player
 router.get('/players/new', (req, res, next) => {
     Players.getPlayers()
     .then((Games) => { 
@@ -105,6 +109,7 @@ router.get('/players/new', (req, res, next) => {
     })
 })
 
+// Get player with Id
 router.get('/players/:id', (req, res, next) => {
     Players.getPlayers(req.body)
     res.format({
@@ -117,6 +122,7 @@ router.get('/players/:id', (req, res, next) => {
     })
 })
 
+// Edit player with Id
 router.get('/players/:id/edit', (req, res, next) => {
     Players.getPlayers()
     .then((Players) => { 
@@ -147,6 +153,7 @@ router.get('/players/:id/edit', (req, res, next) => {
     })
 })
 
+// Edit players with Id
 router.patch('/players/:id', (req, res, next) => {
     Players.deletePlayers(req.body)
     res.format({
@@ -159,6 +166,7 @@ router.patch('/players/:id', (req, res, next) => {
     })
 })
 
+// Delete player with Id 
 router.delete('/players/:id', (req, res, next) => {
     Players.deletePlayers(req.body)
     res.format({
@@ -173,7 +181,8 @@ router.delete('/players/:id', (req, res, next) => {
 
 // Games
 
-router.get('/games/', (req, res, next) => {
+// Show Games
+router.get('/games', (req, res, next) => {
     Players.getGame()
     .then((Games) => { 
         res.format({
@@ -206,6 +215,7 @@ router.get('/games/', (req, res, next) => {
     })
 })
 
+// Show form creat new party
 router.get('/games/new', (req, res, next) => {
     Players.newGame()
     .then((Games) => { 
@@ -236,6 +246,7 @@ router.get('/games/new', (req, res, next) => {
     })
 })
 
+// Create new game
 router.post('/games', (req, res, next) => {
     Players.newGame(req.body)
     res.format({
@@ -248,10 +259,12 @@ router.post('/games', (req, res, next) => {
     })
 })
 
+// Get game with Id
 router.get('/games/:id' , (req, res, next) => {
     res.render("Route ok")
 })
 
+// Edit game with Id
 router.get('/games/:id/edit', (req, res, next) => {
     Players.newGame()
     .then((Games) => { 
@@ -282,6 +295,7 @@ router.get('/games/:id/edit', (req, res, next) => {
     })
 })
 
+// Edit name and gamemode 
 router.patch('/games/:id', (req, res, next) => {
     Players.newGame(req.body)
     res.format({
@@ -294,6 +308,7 @@ router.patch('/games/:id', (req, res, next) => {
     })
 })
 
+// Delete game with Id
 router.delete('/games/:id', (req, res, next) => {
     Players.deleteGame(req.body)
     res.format({
@@ -306,6 +321,7 @@ router.delete('/games/:id', (req, res, next) => {
     })
 })
 
+// Show list Players
 router.get('/games/:id/players', (req, res, next) => {
     Players.getGame()
     .then((Games) => { 
@@ -336,11 +352,38 @@ router.get('/games/:id/players', (req, res, next) => {
     })
 })
 
+// Add players in game
 router.post('/games/:id/players', (req, res, next) => {
     Players.insertPlayers(req.body)
     res.format({
         html : () => {
             res.redirect(301, '/games/:id/players')
+        },
+        json : () => {
+            res.status(204).send('Pas de body')
+        }
+    })
+})
+
+// Delete players in game
+router.delete('/games/:id/players', (req, res, next) => {
+    Players.deletePlayers(req.body)
+    res.format({
+        html : () => {
+            res.redirect(301, '/games/:id/players')
+        },
+        json : () => {
+            res.status(204).send('Pas de body')
+        }
+    })
+})
+
+// Shots 
+router.post('/games/:id/shots', (req, res, next) => {
+    Players.deletePlayers(req.body)
+    res.format({
+        html : () => {
+            res.redirect(301, '/games/:id')
         },
         json : () => {
             res.status(204).send('Pas de body')
@@ -362,19 +405,5 @@ router.use((err, req, res, next) => {
         }
     })
 })
-
-// const router = require('express').Router()
-// const gameRouter = require('./routers/game.js')
-
-// router.use('/players', gameRouter)
-// router.use('/players/new', gameRouter)
-// router.use('/players/{id}', gameRouter)
-// router.use('/players/{id}/edit', gameRouter)
-// router.use('/games', gameRouter)
-// router.use('/games/new', gameRouter)
-// router.use('/games/{id}', gameRouter)
-// router.use('/games/{id}/edit', gameRouter)
-// router.use('/games/{id}/players', gameRouter)
-// router.use('/games/{id}/shots', gameRouter)
 
 module.exports = router;

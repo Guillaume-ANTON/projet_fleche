@@ -1,11 +1,6 @@
-// class Players {
-//   constructor(name) {
-//     this.name = name;
-//     this.score = 0;
-//   }
-// }
 const db = require('sqlite')
 
+// Function route ---> db
 module.exports = {
 
   getPlayers(){
@@ -32,6 +27,3 @@ module.exports = {
   }
 
 }
-
-
-// module.exports = Players

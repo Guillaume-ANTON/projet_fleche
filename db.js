@@ -1,6 +1,7 @@
 const db = require('sqlite')
 const base = require('express').Router()
 
+// Database 
 db.open('api.db').then(() => {
     Promise.all([
       db.run("CREATE TABLE IF NOT EXISTS Player (id INTEGER PRIMARY KEY AUTOINCREMENT, name varchar(255), email varchar(255), gamewin int, gamelost int, createdAt Datetime)"),
